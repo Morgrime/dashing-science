@@ -10,5 +10,10 @@ danil_button = InlineKeyboardButton(
     url='https://t.me/Morgrime'
 )
 
+vk_button = InlineKeyboardButton(
+    text='Группа ВК',
+    url='https://vk.com/lihaya_nauka'
+)
 
-support_keyboard = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_button]])
+
+support_keyboard = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_button], [vk_button]])
