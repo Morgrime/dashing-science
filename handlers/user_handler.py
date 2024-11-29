@@ -19,7 +19,7 @@ async def help_command(message: Message):
                          '2) Вам зададут несколько уточняющих вопросов\n'
                          '3) После вопросов вам будет выдана примерная стоимость интересующей вам работы')
 
-# /support - связаться с Ильнаром напрямую
+# /support - ссылки на меня, Ильнара или группу вк
 @router.message(Command('support'))
 async def support_command(message: Message):
     await message.answer(text='Поддежка пользователя', 
