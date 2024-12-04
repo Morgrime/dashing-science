@@ -31,13 +31,21 @@ support_keyboard = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_
 # курсовая
 kurs_button = InlineKeyboardButton(
     text='Курсовая',
-    callback_data='kurs'
+    callback_data='kurs_button'
 )
 
 # диплом
 diplom_button = InlineKeyboardButton(
     text='Диплом',
-    callback_data='dipl'
+    callback_data='dipl_button'
 )
 
 service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button], [diplom_button]])
+
+"""
+Функциональные кнопки
+"""
+cancel_button = InlineKeyboardButton(
+    text='Отмена',
+    callback_data='cancel_button'
+)
