@@ -8,8 +8,8 @@ async def set_main_menu(bot: Bot):
     main_menu_commands = [
         BotCommand(command='/help',
                    description='Справка по работе бота'),
-        BotCommand(command='/choose_service',
-                   description='Выбрать услугу'),
+        BotCommand(command='/calculate',
+                   description='Посчитать стоимость работы'),
         BotCommand(command='/support',
                    description='Связаться с техподдержкой')
     ]
