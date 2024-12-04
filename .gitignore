@@ -3,6 +3,15 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Exclude .pyc
+*.pyc
+
+# Exclude .pyo (optimized byte-code files)
+*.pyo
+
+# Exclude.pyd files (Windows extension)
+*.pyd
+
 # C extensions
 *.so
 
