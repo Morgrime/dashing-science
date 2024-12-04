@@ -30,11 +30,14 @@ support_keyboard = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_
 
 # курсовая
 kurs_button = InlineKeyboardButton(
-    text='Курсовая'
+    text='Курсовая',
+    callback_data='kurs'
 )
 
 # диплом
 diplom_button = InlineKeyboardButton(
-    text='Диплом'
+    text='Диплом',
+    callback_data='dipl'
 )
 
+service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button], [diplom_button]])
