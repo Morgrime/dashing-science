@@ -1,9 +1,18 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 """
+Функциональные кнопки
+"""
+cancel_button = InlineKeyboardButton(
+    text='Отмена',
+    callback_data='cancel_button'
+)
+
+cancel_kb = InlineKeyboardMarkup(inline_keyboard=[[cancel_button]])
+
+"""
 Здесь будут кнопки для связи с техподдержкой
 """
-
 # ссылка на ильнара
 ilnar_button = InlineKeyboardButton(
     text='Поддержка пользователя',
@@ -22,7 +31,7 @@ vk_button = InlineKeyboardButton(
     url='https://vk.com/lihaya_nauka'
 )
 
-support_keyboard = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_button], [vk_button]])
+support_kb = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button], [danil_button], [vk_button], [cancel_button]])
 
 """
 Здесь будут кнопки для выбора услуги
@@ -40,12 +49,6 @@ diplom_button = InlineKeyboardButton(
     callback_data='dipl_button'
 )
 
-service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button], [diplom_button]])
+service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button], [diplom_button], [cancel_button]])
 
-"""
-Функциональные кнопки
-"""
-cancel_button = InlineKeyboardButton(
-    text='Отмена',
-    callback_data='cancel_button'
-)
+
