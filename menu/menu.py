@@ -11,7 +11,9 @@ async def set_main_menu(bot: Bot):
         BotCommand(command='/calculate',
                    description='Посчитать стоимость работы'),
         BotCommand(command='/support',
-                   description='Связаться с техподдержкой')
+                   description='Связаться с техподдержкой'),
+        BotCommand(command='/cancel',
+                   description='Отмена')
     ]
 
     await bot.set_my_commands(main_menu_commands)
