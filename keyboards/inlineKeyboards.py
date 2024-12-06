@@ -77,6 +77,9 @@ ninety_plus = InlineKeyboardButton(
     callback_data='ninety'
 )
 
+originality_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[sixty, seventy, 
+                                                                 eighty, ninety_plus], [cancel_button]])
+
 
 """
 Диапазоны дедлайна
@@ -101,3 +104,5 @@ two_week_plus = InlineKeyboardButton(
     callback_data='15days+'
 )
 
+deadline_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[one_to_seven, eight_to_ten, 
+                                                              eleven_to_14, two_week_plus], [cancel_button]])
