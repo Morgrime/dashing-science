@@ -99,7 +99,7 @@ async def warning_not_originality(message: Message):
                          'либо введите сами в диапазоне от 60 до 100')
 
 # вопрос про пожелания к работе (необязательный)
-@router.message(StateFilter(KursStates.deadline), F.text.isalpha())    
+@router.message(StateFilter(KursStates.deadline), lambda x: x.text.isdigit() and 1 <= int(x.text) <= 99999)    
 async def fill_originality(message: Message, state: FSMContext):
     await state.update_data(deadline=message.text)
     await message.answer('Ваши пожелания к работе? (данный пункт не обязателен)', reply_markup=cancel_kb)
