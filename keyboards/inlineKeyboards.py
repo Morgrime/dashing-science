@@ -10,6 +10,7 @@ cancel_button = InlineKeyboardButton(
 
 cancel_kb = InlineKeyboardMarkup(inline_keyboard=[[cancel_button]])
 
+
 """
 Здесь будут кнопки для связи с техподдержкой
 """
@@ -33,6 +34,7 @@ vk_button = InlineKeyboardButton(
 
 support_kb = InlineKeyboardMarkup(inline_keyboard=[[ilnar_button, danil_button, vk_button], [cancel_button]])
 
+
 """
 Здесь будут кнопки для выбора услуги
 """
@@ -51,4 +53,51 @@ diplom_button = InlineKeyboardButton(
 
 service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button], [cancel_button]])
 
+
+"""
+Диапазоны оригинальности
+"""
+sixty = InlineKeyboardButton(
+    text='60-70%',
+    callback_data='sixty'
+)
+
+seventy = InlineKeyboardButton(
+    text='71-80%',
+    callback_data='seventy'
+)
+
+eighty = InlineKeyboardButton(
+    text='81-90%',
+    callback_data='eighty'
+)
+
+ninety_plus = InlineKeyboardButton(
+    text='90%+',
+    callback_data='ninety'
+)
+
+
+"""
+Диапазоны дедлайна
+"""
+one_to_seven = InlineKeyboardButton(
+    text='1-7 дней',
+    callback_data='1-7days'
+)
+
+eight_to_ten = InlineKeyboardButton(
+    text='8-10 дней',
+    callback_data='8-10days'
+)
+
+eleven_to_14 = InlineKeyboardButton(
+    text='11-14 дней',
+    callback_data='11-14days'
+)
+
+two_week_plus = InlineKeyboardButton(
+    text='15+ дней',
+    callback_data='15days+'
+)
 
