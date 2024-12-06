@@ -8,6 +8,9 @@ from keyboards.inlineKeyboards import support_kb, service_kb, cancel_kb, origina
 
 router = Router()
 
+user_dict: dict[int, dict[str, str | int | bool]] = {}
+TOTAL = 0
+
 """
 Команда /start
 """
@@ -66,6 +69,8 @@ async def choose_service(message: Message):
 # вопрос про тему
 @router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(default_state))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
+    global TOTAL
+    TOTAL += 3000
     await callback_query.message.answer('Вы выбрали курсовую, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n'
                                         'Напишите тему вашей курсовой работы.', reply_markup=cancel_kb)
     # await state.update_data(theme=)
@@ -113,10 +118,21 @@ async def warning_not_originality(message: Message):
 async def warning_not_deadline(message: Message):
     await message.answer('Пожалуйста используйте кнопки для того чтобы указать сколько дней осталось до дедлайна,')    
 
+
 # тут возвращаются все данные
 @router.message(StateFilter(KursStates.wishes))
 async def get_all_data(message: Message, state: FSMContext):
-    pass
+    await state.update_data(wishes=message.text)
+    user_dict[message.from_user.id] = await state.get_data() # все данные засовываются в словарь
+    await state.clear()
+    await message.answer(
+        f'Тема - {user_dict[message.from_user.id]["theme"]}\n'
+        f'Оригинальность - {user_dict[message.from_user.id]["originality"]}\n'
+        f'Дней до сдачи - {user_dict[message.from_user.id]["deadline"]}\n'
+        f'Пожелания - {user_dict[message.from_user.id]["wishes"]}\n\n'
+        f'Итоговая стоимость - {TOTAL}'
+    )
+
 
 """
 Димлом - хэдлер для начала рассчета стоимости диплома
