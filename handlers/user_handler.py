@@ -71,11 +71,6 @@ async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     # await state.update_data(theme=)
     await state.set_state(KursStates.theme) # установления состояния "Тема"
 
-# проверка на ̶в̶ш̶и̶в̶о̶с̶т̶ь̶  наличие текста
-@router.message(StateFilter(KursStates.theme), lambda x: x.text.isdigit())
-async def warning_not_text(message: Message):
-    await message.answer('Пожалуйста введите тему вашей курсовой.')
-
 # вопрос про процент оригинальности
 @router.message(StateFilter(KursStates.theme), F.text.isalpha())    
 async def fill_originality(message: Message, state: FSMContext):
@@ -92,12 +87,6 @@ async def fill_originality(message: Message, state: FSMContext):
     await message.answer('Сколько дней осталось до сдачи работы?', reply_markup=deadline_diapason_kb)
     await state.set_state(KursStates.deadline) # установление состояния "Дедлайн"
 
-# если в предыдущий хэндлер засунули что-то кроме оригинальности
-@router.message(StateFilter(KursStates.originality))
-async def warning_not_originality(message: Message):
-    await message.answer('Пожалуйста используйте кнопки для выбора процента оригинальности,'
-                         'либо введите сами в диапазоне от 60 до 100')
-
 # вопрос про пожелания к работе (необязательный)
 @router.message(StateFilter(KursStates.deadline), lambda x: x.text.isdigit() and 1 <= int(x.text) <= 99999)    
 async def fill_originality(message: Message, state: FSMContext):
@@ -105,10 +94,24 @@ async def fill_originality(message: Message, state: FSMContext):
     await message.answer('Ваши пожелания к работе? (данный пункт не обязателен)', reply_markup=cancel_kb)
     await state.set_state(KursStates.wishes) # установление состояния "Пожелания"
 
+"""
+Проверка введённых данных
+"""
+# проверка на ̶в̶ш̶и̶в̶о̶с̶т̶ь̶  наличие текста
+@router.message(StateFilter(KursStates.theme), lambda x: x.text.isdigit())
+async def warning_not_text(message: Message):
+    await message.answer('Пожалуйста введите тему вашей курсовой.')
+
+# если в предыдущий хэндлер засунули что-то кроме оригинальности
+@router.message(StateFilter(KursStates.originality))
+async def warning_not_originality(message: Message):
+    await message.answer('Пожалуйста используйте кнопки для выбора процента оригинальности,'
+                         'либо введите сами в диапазоне от 60 до 100')
+
 # если в предыдущий хэндлер засунули что-то кроме дедлайна
 @router.message(StateFilter(KursStates.deadline))
 async def warning_not_deadline(message: Message):
-    await message.answer('Пожалуйста используйте кнопки для того чтобы указать сколько дней осталось до дедлайна,')
+    await message.answer('Пожалуйста используйте кнопки для того чтобы указать сколько дней осталось до дедлайна,')    
 
 # тут возвращаются все данные
 @router.message(StateFilter(KursStates.wishes))
