@@ -3,7 +3,7 @@ from aiogram.filters import StateFilter
 from aiogram.fsm.state import default_state
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
-from FSM.states import KursStates
+from FSM.states import KursStates, Universal
 from keyboards.inlineKeyboards import cancel_kb, originality_diapason_kb, deadline_diapason_kb
 from filters.filters import is_valid_text
 
@@ -16,7 +16,7 @@ TOTAL = 0
 Курсовая - хэдлер для начала рассчета стоимости курсовой
 """
 # вопрос про тему
-@router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(KursStates.choise))    
+@router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(Universal.choice))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     TOTAL += 3000
