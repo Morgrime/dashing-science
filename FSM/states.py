@@ -6,6 +6,7 @@ class KursStates(StatesGroup):
     originality = State() # какой процент оригинальности нужен
     deadline = State() # сколько дней до дедлайна
     wishes = State() # пожелания (не обязательно)
+    total = State()
 
 class DiplStates(StatesGroup):
     theme = State()
