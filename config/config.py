@@ -4,4 +4,4 @@ from environs import Env
 env = Env()
 env.read_env()
 BOT_TOKEN = env("TOKEN")
-ADMIN_IDS = env("ADMINS")
+# ADMIN_IDS = env("ADMINS")
