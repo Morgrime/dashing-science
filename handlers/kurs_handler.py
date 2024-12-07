@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from FSM.states import KursStates
 from keyboards.inlineKeyboards import cancel_kb, originality_diapason_kb, deadline_diapason_kb
+from filters.filters import is_valid_text
 
 router = Router()
 
@@ -15,7 +16,7 @@ TOTAL = 0
 Курсовая - хэдлер для начала рассчета стоимости курсовой
 """
 # вопрос про тему
-@router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(default_state))    
+@router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(KursStates.choise))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     TOTAL += 3000
@@ -27,7 +28,7 @@ async def fill_theme(callback_query: types.CallbackQuery, state: FSMContext):
     await state.set_state(KursStates.theme) # установления состояния "Тема"
 
 # вопрос про процент оригинальности
-@router.message(StateFilter(KursStates.theme), F.text.isalpha())    
+@router.message(StateFilter(KursStates.theme), F.text.func(is_valid_text))    
 async def fill_originality(message: Message, state: FSMContext):
     await state.update_data(theme=message.text)
     await message.answer('Какой процент оригинальности вы ожидаете?\n', 
