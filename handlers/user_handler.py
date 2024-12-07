@@ -70,9 +70,10 @@ async def support_command(message: Message):
 Кнопка calculate - выбрать услугу
 """
 @router.message(Command('calculate'))
-async def choose_service(message: Message):
+async def choose_service(message: Message, state: FSMContext):
     await message.answer(text='Выберите услугу',
                          reply_markup=service_kb)
+    await state.set_state(KursStates.choise)
 
 
 """
