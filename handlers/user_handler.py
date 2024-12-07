@@ -87,7 +87,7 @@ async def fill_originality(message: Message, state: FSMContext):
     await state.set_state(KursStates.originality) # установление состояния "Оригинальность"
 
 # выбор диапазона оригинальности
-@router.callback_query(F.data.in_(['sixty', 'seventy', 'eighty', 'ninety']))
+@router.callback_query(F.data.in_(['sixty', 'seventy', 'eighty', 'ninety']), StateFilter(KursStates.originality))
 async def choosen_diapason_of_originality(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     originality_costing = {
@@ -111,7 +111,7 @@ async def fill_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     await callback_query.message.answer('Сколько дней осталось до сдачи работы?', reply_markup=deadline_diapason_kb)
     await state.set_state(KursStates.deadline)
 
-@router.callback_query(F.data.in_(['1-7days', '8-10days', '11-14days', '15days+']))
+@router.callback_query(F.data.in_(['1-7days', '8-10days', '11-14days', '15days+']), StateFilter(KursStates.deadline))
 async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     deadline_costing = {
