@@ -58,17 +58,17 @@ service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button],
 Диапазоны оригинальности
 """
 sixty = InlineKeyboardButton(
-    text='60+',
+    text='60%+',
     callback_data='sixty'
 )
 
 seventy = InlineKeyboardButton(
-    text='70+',
+    text='70%+',
     callback_data='seventy'
 )
 
 eighty = InlineKeyboardButton(
-    text='80+',
+    text='80%+',
     callback_data='eighty'
 )
 
