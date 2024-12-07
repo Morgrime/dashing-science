@@ -2,6 +2,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state, State, StatesGroup
 
 class KursStates(StatesGroup):
+    choise = State()
     theme = State()
     originality = State() # какой процент оригинальности нужен
     deadline = State() # сколько дней до дедлайна
