@@ -1,10 +1,10 @@
 from aiogram import Router, types, F
-from aiogram.filters import CommandStart, Command, StateFilter
+from aiogram.filters import StateFilter
 from aiogram.fsm.state import default_state
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
-from FSM.states import KursStates, DiplStates
-from keyboards.inlineKeyboards import support_kb, service_kb, cancel_kb, originality_diapason_kb, deadline_diapason_kb
+from FSM.states import KursStates
+from keyboards.inlineKeyboards import cancel_kb, originality_diapason_kb, deadline_diapason_kb
 
 router = Router()
 
