@@ -4,7 +4,7 @@ from aiogram.fsm.state import default_state
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from FSM.states import KursStates, DiplStates
-from keyboards.inlineKeyboards import support_kb, service_kb, cancel_kb, originality_diapason_kb, deadline_diapason_kb
+from keyboards.inlineKeyboards import support_kb, service_kb
 
 router = Router()
 
@@ -19,6 +19,7 @@ async def start_command(message: Message):
     await message.answer('Приветствую, я бот от Лихой Науки\n\n'
                         'Моя задача облегчить вам подбор нужной вам работы, а также её стоимость\n'
                         'Если будут вопросы - напишите команду /help')
+
 
 """
 Инлайн-кнопка cancel - кнопка в меню для отмены заполнения работы
@@ -55,6 +56,7 @@ async def help_command(message: Message):
                          '2) Вам зададут несколько уточняющих вопросов\n'
                          '3) После вопросов вам будет выдана примерная стоимость интересующей вам работы')
 
+
 """
 Кнопка support - ссылки на меня, Ильнара или группу вк
 """
@@ -63,6 +65,7 @@ async def support_command(message: Message):
     await message.answer(text='Поддежка пользователя', 
                         reply_markup=support_kb)
 
+
 """
 Кнопка calculate - выбрать услугу
 """
@@ -70,7 +73,6 @@ async def support_command(message: Message):
 async def choose_service(message: Message):
     await message.answer(text='Выберите услугу',
                          reply_markup=service_kb)
-
 
 
 """
