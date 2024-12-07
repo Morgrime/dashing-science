@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart, Command, StateFilter
 from aiogram.fsm.state import default_state
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
-from FSM.states import KursStates, DiplStates
+from FSM.states import Universal
 from keyboards.inlineKeyboards import support_kb, service_kb
 
 router = Router()
@@ -73,7 +73,7 @@ async def support_command(message: Message):
 async def choose_service(message: Message, state: FSMContext):
     await message.answer(text='Выберите услугу',
                          reply_markup=service_kb)
-    await state.set_state(KursStates.choise)
+    await state.set_state(Universal.choice)
 
 
 """
