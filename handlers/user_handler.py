@@ -35,6 +35,8 @@ async def process_cancel_button(callback_query: types.CallbackQuery, state: FSMC
                  'Для этого используйте /calculate')
     else:
         await callback_query.message.answer(text='Работа отменена')
+        global TOTAL
+        TOTAL = 0
         await state.clear()
 
 @router.message(Command('cancel'))

@@ -6,11 +6,11 @@ from aiogram.types import Message
 from FSM.states import DiplStates, Universal
 from keyboards.inlineKeyboards import cancel_kb, originality_diapason_kb, deadline_diapason_kb
 from filters.filters import is_valid_text
+from handlers.user_handler import TOTAL
 
 router = Router()
 
 user_dict: dict[int, dict[str, str | int | bool]] = {}
-TOTAL = 0
 
 """
 Дипломная - хэдлер для начала рассчета стоимости дипломной работы
@@ -19,7 +19,7 @@ TOTAL = 0
 @router.callback_query(lambda c: c.data == 'dipl_button', StateFilter(Universal.choice))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
-    TOTAL += 10000
+    TOTAL = 10000
     await callback_query.message.answer('Вы выбрали дипломную работу, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
     await fill_theme(callback_query, state)
 

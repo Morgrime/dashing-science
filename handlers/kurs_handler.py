@@ -6,11 +6,11 @@ from aiogram.types import Message
 from FSM.states import KursStates, Universal
 from keyboards.inlineKeyboards import cancel_kb, originality_diapason_kb, deadline_diapason_kb
 from filters.filters import is_valid_text
+from handlers.user_handler import TOTAL
 
 router = Router()
 
 user_dict: dict[int, dict[str, str | int | bool]] = {}
-TOTAL = 0
 
 """
 Курсовая - хэдлер для начала рассчета стоимости курсовой
@@ -19,7 +19,7 @@ TOTAL = 0
 @router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(Universal.choice))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
-    TOTAL += 3000
+    TOTAL = 3000
     await callback_query.message.answer('Вы выбрали курсовую, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
     await fill_theme(callback_query, state)
 
