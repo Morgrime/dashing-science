@@ -12,6 +12,7 @@ class KursStates(StatesGroup):
 
 class DiplStates(StatesGroup):
     theme = State()
+    project = State() # проектная вкр или нет
     originality = State() # какой процент оригинальности нужен
     deadline = State() # сколько дней до дедлайна
     wishes = State() # пожелания (не обязательно)
