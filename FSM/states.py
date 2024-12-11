@@ -4,14 +4,14 @@ class Universal(StatesGroup):
     choice = State()
 
 class KursStates(StatesGroup):
-    theme = State()
+    theme = State() # вопрос какая тема
     originality = State() # какой процент оригинальности нужен
     deadline = State() # сколько дней до дедлайна
     wishes = State() # пожелания (не обязательно)
-    total = State()
+    total = State() # вывод заполненной информации
 
 class DiplStates(StatesGroup):
-    theme = State()
+    theme = State() 
     project = State() # проектная вкр или нет
     originality = State() # какой процент оригинальности нужен
     deadline = State() # сколько дней до дедлайна
