@@ -10,6 +10,17 @@ cancel_button = InlineKeyboardButton(
 
 cancel_kb = InlineKeyboardMarkup(inline_keyboard=[[cancel_button]])
 
+yes_button = InlineKeyboardButton(
+    text='Да',
+    callback_data='yes_button'
+)
+
+no_button = InlineKeyboardButton(
+    text='Нет',
+    callback_data='no_button'
+)
+
+yes_no_kb = InlineKeyboardMarkup(inline_keyboard=[[yes_button, no_button], [cancel_button]])
 
 """
 Здесь будут кнопки для связи с техподдержкой
@@ -52,18 +63,18 @@ diplom_button = InlineKeyboardButton(
 )
 
 # реферат
-diplom_button = InlineKeyboardButton(
+ref_button = InlineKeyboardButton(
     text='Реферат',
     callback_data='ref_button'
 )
 
 # научная статья
-diplom_button = InlineKeyboardButton(
+science_button = InlineKeyboardButton(
     text='Науч. статья',
     callback_data='science_button'
 )
 
-service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button], [cancel_button]])
+service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button, ref_button, science_button], [cancel_button]])
 
 
 """
