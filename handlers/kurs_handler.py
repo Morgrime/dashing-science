@@ -1,6 +1,5 @@
 from aiogram import Router, types, F
 from aiogram.filters import StateFilter
-from aiogram.fsm.state import default_state
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from FSM.states import KursStates, Universal
@@ -19,12 +18,12 @@ user_dict: dict[int, dict[str, str | int | bool]] = {}
 @router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(Universal.choice))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
-    TOTAL = 3000
-    await callback_query.message.answer('Вы выбрали курсовую, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
+    TOTAL = 1500
+    await callback_query.message.answer('Вы выбрали курсовую работу, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
     await fill_theme(callback_query, state)
 
 async def fill_theme(callback_query: types.CallbackQuery, state: FSMContext):
-    await callback_query.message.answer('Напишите тему вашей курсовой работы.', reply_markup=cancel_kb)
+    await callback_query.message.answer('Напишите тему вашей курсовой.', reply_markup=cancel_kb)
     await state.set_state(KursStates.theme) # установления состояния "Тема"
 
 # вопрос про процент оригинальности
@@ -36,16 +35,18 @@ async def fill_originality(message: Message, state: FSMContext):
     await state.set_state(KursStates.originality) # установление состояния "Оригинальность"
 
 # выбор диапазона оригинальности
-@router.callback_query(F.data.in_(['sixty', 'seventy', 'eighty', 'ninety']), StateFilter(KursStates.originality))
+@router.callback_query(F.data.in_(['fifty', 'sixty', 'seventy', 'eighty', 'ninety']), StateFilter(KursStates.originality))
 async def choosen_diapason_of_originality(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     originality_costing = {
-        'sixty': 300,
-        'seventy': 450,
-        'eighty': 750,
-        'ninety': 1050
+        'fifty': 0,
+        'sixty': 200,
+        'seventy': 300,
+        'eighty': 450,
+        'ninety': 550
     }
     originality_mapping = {
+        'fifty': '50%+',
         'sixty': '60%+',
         'seventy': '70%+',
         'eighty': '80%+',
@@ -60,20 +61,23 @@ async def fill_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     await callback_query.message.answer('Сколько дней осталось до сдачи работы?', reply_markup=deadline_diapason_kb)
     await state.set_state(KursStates.deadline)
 
-@router.callback_query(F.data.in_(['1-7days', '8-10days', '11-14days', '15days+']), StateFilter(KursStates.deadline))
+# выбор дедлайна
+@router.callback_query(F.data.in_(['1-3days', '4-7 days', '8-10days', '11-14days', '15days+']), StateFilter(KursStates.deadline))
 async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     deadline_costing = {
-        '1-7days': 1500,
-         '8-10days': 900,
-         '11-14days': 450,
-         '15days+': 0
+        '1-3days': 550,
+        '4-7days': 350,
+        '8-10days': 200,
+        '11-14days': 100,
+        '15days+': 0
     }
     deadline_mapping = {
-        '1-7days': '1-7 дней',
-         '8-10days': '8-10 дней',
-         '11-14days': '11-14 дней',
-         '15days+': '15+ дней'
+        '1-3days': '1-3 дней',
+        '4-7days': '4-7 дней',
+        '8-10days': '8-10 дней',
+        '11-14days': '11-14 дней',
+        '15days+': '15+ дней'
     }
     TOTAL += deadline_costing[callback_query.data]
     await callback_query.message.answer(f'У вас осталось {deadline_mapping[callback_query.data]}')
@@ -90,12 +94,12 @@ async def fill_wishes(callback_query: types.CallbackQuery, state: FSMContext):
 # проверка на ̶в̶ш̶и̶в̶о̶с̶т̶ь̶  наличие текста
 @router.message(StateFilter(KursStates.theme), lambda x: x.text.isdigit())
 async def warning_not_text(message: Message):
-    await message.answer('Пожалуйста, введите тему вашей курсовой.')
+    await message.answer('Пожалуйста, введите тему вашей курсовой работы.')
 
 # если в предыдущий хэндлер засунули что-то кроме оригинальности
 @router.message(StateFilter(KursStates.originality))
 async def warning_not_originality(message: Message):
-    await message.answer('Пожалуйста, используйте кнопки для выбора процента оригинальности.')
+    await message.answer('Пожалуйста, используйте кнопки для того чтобы указать процент оригинальности.')
 
 # если в предыдущий хэндлер засунули что-то кроме дедлайна
 @router.message(StateFilter(KursStates.deadline))
@@ -116,6 +120,6 @@ async def get_all_data(message: Message, state: FSMContext):
         f'Оригинальность - {user_dict[message.from_user.id]["originality"]}\n'
         f'Дней до сдачи - {user_dict[message.from_user.id]["deadline"]}\n'
         f'Пожелания - {user_dict[message.from_user.id]["wishes"]}\n\n'
-        f'Итоговая стоимость - {TOTAL}'
+        f'Итоговая стоимость - от {TOTAL}'
     )
     TOTAL = 0 
