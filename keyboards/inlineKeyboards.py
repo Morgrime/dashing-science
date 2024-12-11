@@ -51,12 +51,29 @@ diplom_button = InlineKeyboardButton(
     callback_data='dipl_button'
 )
 
+# реферат
+diplom_button = InlineKeyboardButton(
+    text='Реферат',
+    callback_data='ref_button'
+)
+
+# научная статья
+diplom_button = InlineKeyboardButton(
+    text='Науч. статья',
+    callback_data='science_button'
+)
+
 service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button], [cancel_button]])
 
 
 """
 Диапазоны оригинальности
 """
+fifty = InlineKeyboardButton(
+    text='50%+',
+    callback_data='fifty'
+)
+
 sixty = InlineKeyboardButton(
     text='60%+',
     callback_data='sixty'
@@ -77,16 +94,21 @@ ninety_plus = InlineKeyboardButton(
     callback_data='ninety'
 )
 
-originality_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[sixty, seventy, 
+originality_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[fifty, sixty, seventy, 
                                                                  eighty, ninety_plus], [cancel_button]])
 
 
 """
 Диапазоны дедлайна
 """
-one_to_seven = InlineKeyboardButton(
-    text='1-7 дней',
-    callback_data='1-7days'
+one_to_three = InlineKeyboardButton(
+    text='1-3 дней',
+    callback_data='1-3days'
+)
+
+four_to_seven = InlineKeyboardButton(
+    text='4-7 дней',
+    callback_data='4-7days'
 )
 
 eight_to_ten = InlineKeyboardButton(
@@ -104,5 +126,5 @@ two_week_plus = InlineKeyboardButton(
     callback_data='15days+'
 )
 
-deadline_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[one_to_seven, eight_to_ten, 
+deadline_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[one_to_three, four_to_seven, eight_to_ten, 
                                                               eleven_to_14, two_week_plus], [cancel_button]])
