@@ -10,6 +10,17 @@ cancel_button = InlineKeyboardButton(
 
 cancel_kb = InlineKeyboardMarkup(inline_keyboard=[[cancel_button]])
 
+yes_button = InlineKeyboardButton(
+    text='Да',
+    callback_data='yes_button'
+)
+
+no_button = InlineKeyboardButton(
+    text='Нет',
+    callback_data='no_button'
+)
+
+yes_no_kb = InlineKeyboardMarkup(inline_keyboard=[[yes_button, no_button], [cancel_button]])
 
 """
 Здесь будут кнопки для связи с техподдержкой
@@ -51,24 +62,41 @@ diplom_button = InlineKeyboardButton(
     callback_data='dipl_button'
 )
 
-service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button], [cancel_button]])
+# реферат
+ref_button = InlineKeyboardButton(
+    text='Реферат',
+    callback_data='ref_button'
+)
+
+# научная статья
+science_button = InlineKeyboardButton(
+    text='Науч. статья',
+    callback_data='science_button'
+)
+
+service_kb = InlineKeyboardMarkup(inline_keyboard=[[kurs_button, diplom_button, ref_button, science_button], [cancel_button]])
 
 
 """
 Диапазоны оригинальности
 """
+fifty = InlineKeyboardButton(
+    text='50%+',
+    callback_data='fifty'
+)
+
 sixty = InlineKeyboardButton(
-    text='60-70%',
+    text='60%+',
     callback_data='sixty'
 )
 
 seventy = InlineKeyboardButton(
-    text='71-80%',
+    text='70%+',
     callback_data='seventy'
 )
 
 eighty = InlineKeyboardButton(
-    text='81-90%',
+    text='80%+',
     callback_data='eighty'
 )
 
@@ -77,16 +105,21 @@ ninety_plus = InlineKeyboardButton(
     callback_data='ninety'
 )
 
-originality_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[sixty, seventy, 
+originality_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[fifty, sixty, seventy, 
                                                                  eighty, ninety_plus], [cancel_button]])
 
 
 """
 Диапазоны дедлайна
 """
-one_to_seven = InlineKeyboardButton(
-    text='1-7 дней',
-    callback_data='1-7days'
+one_to_three = InlineKeyboardButton(
+    text='1-3 дней',
+    callback_data='1-3days'
+)
+
+four_to_seven = InlineKeyboardButton(
+    text='4-7 дней',
+    callback_data='4-7days'
 )
 
 eight_to_ten = InlineKeyboardButton(
@@ -104,5 +137,5 @@ two_week_plus = InlineKeyboardButton(
     callback_data='15days+'
 )
 
-deadline_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[one_to_seven, eight_to_ten, 
+deadline_diapason_kb = InlineKeyboardMarkup(inline_keyboard=[[one_to_three, four_to_seven, eight_to_ten, 
                                                               eleven_to_14, two_week_plus], [cancel_button]])
