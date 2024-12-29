@@ -18,7 +18,9 @@ user_dict: dict[int, dict[str, str | int | bool]] = {}
 @router.callback_query(lambda c: c.data == 'kurs_button', StateFilter(Universal.choice))    
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
-    TOTAL = 1500
+    TOTAL = 3000
+
+    await callback_query.answer() 
     await callback_query.message.answer('Вы выбрали курсовую работу, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
     await fill_theme(callback_query, state)
 
@@ -53,6 +55,7 @@ async def choosen_diapason_of_originality(callback_query: types.CallbackQuery, s
         'ninety': '90%+'
     }
     TOTAL += originality_costing[callback_query.data]
+    await callback_query.answer() 
     await callback_query.message.answer(f'Вы выбрали оригинальность {originality_mapping[callback_query.data]}')
     await state.update_data(originality=originality_mapping[callback_query.data])
     await fill_deadline(callback_query, state)
@@ -66,10 +69,10 @@ async def fill_deadline(callback_query: types.CallbackQuery, state: FSMContext):
 async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     deadline_costing = {
-        '1-3days': 550,
-        '4-7days': 350,
-        '8-10days': 200,
-        '11-14days': 100,
+        '1-3days': 1000,
+        '4-7days': 400,
+        '8-10days': 300,
+        '11-14days': 250,
         '15days+': 0
     }
     deadline_mapping = {
@@ -80,6 +83,7 @@ async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state
         '15days+': '15+ дней'
     }
     TOTAL += deadline_costing[callback_query.data]
+    await callback_query.answer() 
     await callback_query.message.answer(f'У вас осталось {deadline_mapping[callback_query.data]}')
     await state.update_data(deadline=deadline_mapping[callback_query.data])
     await fill_wishes(callback_query, state)

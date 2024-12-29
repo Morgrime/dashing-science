@@ -29,6 +29,7 @@ async def start_command(message: Message):
 @router.callback_query(lambda c: c.data == 'cancel_button')
 async def process_cancel_button(callback_query: types.CallbackQuery, state: FSMContext):
     current_state = await state.get_state()
+    await callback_query.answer() 
     if current_state is None:
         await callback_query.message.answer(
             text='Отменять нечего, пожалуйста выберите нужную услугу для расчета стоимости.\n'

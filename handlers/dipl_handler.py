@@ -18,7 +18,9 @@ user_dict: dict[int, dict[str, str | int | bool]] = {}
 @router.callback_query(lambda c: c.data == 'dipl_button', StateFilter(Universal.choice))
 async def choose_kurs(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
-    TOTAL = 10000
+    TOTAL = 20000
+
+    await callback_query.answer() 
     await callback_query.message.answer('Вы выбрали дипломную работу, пожалуйста ответьте на несколько вопросов, чтобы мы могли оценить вашу работу\n')
     await fill_theme(callback_query, state)
 
@@ -41,6 +43,7 @@ async def handle_project(callback_query: types.CallbackQuery, state: FSMContext)
         project_answer = 'будет'
     else:
         project_answer = 'не будет'
+    await callback_query.answer() 
     await state.update_data(project=project_answer)
     await callback_query.message.answer(f'Вы ответили, что проект {project_answer}')
     await fill_originality(callback_query, state)
@@ -70,6 +73,7 @@ async def choosen_diapason_of_originality(callback_query: types.CallbackQuery, s
         'ninety': '90%+'
     }
     TOTAL += originality_costing[callback_query.data]
+    await callback_query.answer() 
     await callback_query.message.answer(f'Вы выбрали оригинальность {originality_mapping[callback_query.data]}')
     await state.update_data(originality=originality_mapping[callback_query.data])
     await fill_deadline(callback_query, state)
@@ -97,6 +101,7 @@ async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state
         '15days+': '15+ дней'
     }
     TOTAL += deadline_costing[callback_query.data]
+    await callback_query.answer() 
     await callback_query.message.answer(f'У вас осталось {deadline_mapping[callback_query.data]}')
     await state.update_data(deadline=deadline_mapping[callback_query.data])
     await fill_wishes(callback_query, state)
