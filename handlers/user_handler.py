@@ -65,7 +65,7 @@ async def help_command(message: Message):
 """
 @router.message(Command('support'))
 async def support_command(message: Message):
-    await message.answer(text='Поддежка пользователя', 
+    await message.answer(text='Поддержка пользователя', 
                         reply_markup=support_kb)
 
 
