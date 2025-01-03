@@ -65,7 +65,7 @@ async def fill_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     await state.set_state(RefStates.deadline)
 
 # выбор дедлайна
-@router.callback_query(F.data.in_(['1-3days', '4-7 days', '8-10days', '11-14days', '15days+']), StateFilter(RefStates.deadline))
+@router.callback_query(F.data.in_(['1-3days', '4-7days', '8-10days', '11-14days', '15days+']), StateFilter(RefStates.deadline))
 async def chosen_diapason_of_deadline(callback_query: types.CallbackQuery, state: FSMContext):
     global TOTAL
     deadline_costing = {
